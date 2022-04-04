@@ -193,7 +193,8 @@ int main(int argc, char *argv[]){
                 printf("\n 13");
                 break;
             case 14:
-                printf("\n 14");
+                Buscar_un_libro();
+                //al terminar muestro el menu de nuevo;
                 break;
             default:
                 printf("Intentelo nuevamente\n");
@@ -254,6 +255,31 @@ void Eliminar_piso(FILE *file){
 
 };
 
-void Buscar_un_libro(FILE *file){
+void Buscar_un_libro(){
+        char libro = (char)malloc( strlen(libro) * sizeof(char));
+        printf("Ingrese el nombre o parte del nombre del libro a buscar \n");
+        scanf("%s", libro);
+        //Hago una busqueda linea
+        int i = 0;
+        int encontre = 0;
+        while (i<registryCount && encontre == 0){
+            char *nameConverted = toLowerC(libro[i].name);
+            char *nameToLook = toLowerC(libro);
+            char *ret = strstr(nameConverted, nameToLook);
+            //valido que la encuentro y que no la borre antes
+            if(ret && libro[i].borrar == 0){
+                encontre = 1;
+            } else {
+                i++;
+            }
+        }
+        //verifico que sali por que encontre
+        if (encontre == 1){
+            printf("El libro existe, estos son los datos \n");
+            printf("%s,%s. \n", libro[i].name, libro[i].surname);
+        } else {
+            printf("El libro no existe! \n");
+        }
 
+    }
 };
